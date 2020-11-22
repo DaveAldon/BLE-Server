@@ -4,7 +4,7 @@ Turn a prototype device into a discoverable BLE GATT server
 
 ### Requirements
 
-- Raspberry Pi 3B+ / 4B / Zero W
+- Raspberry Pi 3B+ / 4B / Zero W / Pi 400
 - iOS/Android running nRF Toolkit app
 - BlueZ 5.50+ (latest Raspberry Pi OS Full 32-bit) comes with this version
 - Git
