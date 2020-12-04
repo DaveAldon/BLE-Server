@@ -78,13 +78,13 @@ class BatteryCharacteristic(Characteristic):
         return True
 
     def send_tx(self):
-        threading.Timer(5.0, send_tx).start()
+        threading.Timer(5.0, self.send_tx).start()
         if not self.notifying:
             return
         value = []
-        while True:
-            value.append(dbus.Byte(randrange(10).encode()))
-            self.PropertiesChanged(GATT_CHRC_IFACE, {'Value': value}, [])
+        value.append(dbus.Byte(str(randrange(9)).encode()))
+        value.append(dbus.Byte(str(randrange(9)).encode()))
+        self.PropertiesChanged(GATT_CHRC_IFACE, {'Value': value}, [])
 
     def StartNotify(self):
         if self.notifying:
@@ -102,6 +102,7 @@ class UartService(Service):
         Service.__init__(self, bus, index, UART_SERVICE_UUID, True)
         self.add_characteristic(TxCharacteristic(bus, 0, self))
         self.add_characteristic(RxCharacteristic(bus, 1, self))
+        self.add_characteristic(BatteryCharacteristic(bus, 2, self))
 
 
 class Application(dbus.service.Object):
